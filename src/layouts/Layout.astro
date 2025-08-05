@@ -1,0 +1,54 @@
+---
+import NavMen from "../components/NavMenu";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/logotipo.png" />
+		<!-- En el <head> -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<meta name="generator" content={Astro.generator} />
+		<title>Y2KAT</title>
+	</head>
+	<body class="">
+		<NavMen client:load />
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		/* Variables si querés usar colores, fuentes, etc. */
+		--font-base: "Sen", sans-serif;
+		--color-bg: #ffffff;
+		--color-text: #000000;
+	}
+
+	html,
+	body {
+		margin: 0;
+		/* padding: 0px 30px 20px 30px; ariba  derecha  abajo  izquierda */
+		font-family: var(--font-base);
+		background-color: var(--color-bg); /* ✅ color base de fondo */
+		color: var(--color-text);
+		scroll-behavior: smooth; /* ✅ scroll suave al hacer clic en el navbar */
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+</style>

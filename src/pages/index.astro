@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Incio from '../components/Inicio';
+import Productos from '../components/Productos';
+import Entregas from '../components/Entregas';
+import Pagos from '../components/Pagos';
+import SobreMi from '../components/SobreMi';
+import CardSeccion from '../components/ejemplo';
+---
+
+<Layout>
+  <section id="inicio">
+    <Incio />
+  </section>
+
+  <section id="productos">
+    <Productos client:load />
+  </section>
+
+  <section id="entregas">
+    <Entregas></Entregas>
+  </section>
+
+  <section id="pagos">
+    <Pagos/>
+  </section>
+
+  <section id="sobremi">
+    <!-- <SobreMi></SobreMi> -->
+     <CardSeccion client:load></CardSeccion>
+  </section>
+</Layout>
