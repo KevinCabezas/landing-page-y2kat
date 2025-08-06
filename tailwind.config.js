@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        fondoUno: '#00080E',
+        fondoUno: '#ebebeb',
       },
       animation: {
         'slide-in-left': 'slideInLeft 0.3s ease-out forwards',

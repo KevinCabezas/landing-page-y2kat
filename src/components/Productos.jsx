@@ -1,6 +1,13 @@
 import { Icon } from '@iconify/react';
+import { useState } from 'react';
+import Comprar from "./Comprar";
 
 export default function Productos() {
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+
+  const abrirModal = () => setMostrarModal(true);
+  const cerrarModal = () => setMostrarModal(false);
 
   const cards = [
     {
@@ -41,52 +48,62 @@ export default function Productos() {
     }
   ]
 
+
   return (
-   <section
-  id="productos"
-  className="container mx-auto px-6 lg:px-3  pt-[70px] space-y-5 h-[100vh] overflow-y-auto" // Añadí overflow-y-auto
->
-  <h2 className="text-orange-400 text-3xl border-b border-green-300 border-spacing-2 w-ful flex justify-center">Productos</h2>
-  <div className={`grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 `}>
-    {cards.map((card, index) => (
-      <div
-        key={index}
-        className="bg-red-5 text-black flex flex-col md:flex-row gap-2 w-full max-w-4xl mx-auto hover:scale-105 duration-500 ease-in-out"
-      >
-        {/* Cambios solo en este div y su imagen */}
-        <div className="bg-emerald-100/20 overflow-hidden shadow-md rounded-sm flex-shrink-0 md:w-1/2 h-auto lg:h-[200px]">
-          <img 
-            src={card.imagen} 
-            alt={card.nombre}
-            className="w-full h-full object-cover" // Cambios aquí
-          />
-        </div>
-        <div className="flex flex-col gap-[5px] w-full max-w-md mx-auto">
-          <div className="bg-emerald-100/20 p-2 rounded-sm overflow-hidden shadow-md space-y-1">
-            <h3 className="font-semibold text-base md:text-lg lg:text-xl">
-              {card.titulo}
-            </h3>
-            <p className="text-sm md:text-base lg:text-lg">{card.precio}</p>
-            <div className="flex gap-1 items-center">
-              <Icon icon="tabler:star-filled" className="text-yellow-500 w-4 md:w-5 lg:w-6" />
-              <p className="text-sm md:text-base lg:text-lg">{card.estado}</p>
+    <section
+      id="productos"
+      className="container mx-auto px-6 lg:px-3  pt-[70px] space-y-5 h-[100vh] overflow-y-auto" // Añadí overflow-y-auto
+    >
+      <h2 className="text-orange-400 text-3xl border-b border-green-300 border-spacing-2 w-ful flex justify-center">Productos</h2>
+      <div className={`grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 `}>
+        {cards.map((card, index) => (
+          <div
+            key={index}
+            className="bg-red-5 text-black flex flex-col md:flex-row gap-2 w-full max-w-4xl mx-auto hover:scale-105 duration-500 ease-in-out"
+          >
+            {/* Cambios solo en este div y su imagen */}
+            <div className="bg-emerald-100/20 overflow-hidden shadow-md rounded-sm flex-shrink-0 md:w-1/2 h-auto lg:h-[200px]">
+              <img
+                src={card.imagen}
+                alt={card.titulo}
+                className="w-full h-full object-cover" // Cambios aquí
+              />
+            </div>
+            <div className="flex flex-col gap-[5px] w-full max-w-md mx-auto">
+              <div className="bg-emerald-100/20 p-2 rounded-sm overflow-hidden shadow-md space-y-1">
+                <h3 className="font-semibold text-base md:text-lg lg:text-xl">
+                  {card.titulo}
+                </h3>
+                <p className="text-sm md:text-base lg:text-lg">{card.precio}</p>
+                <div className="flex gap-1 items-center">
+                  <Icon icon="tabler:star-filled" className="text-yellow-500 w-4 md:w-5 lg:w-6" />
+                  <p className="text-sm md:text-base lg:text-lg">{card.estado}</p>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center gap-1 w-full">
+                <button className="bg-orange-100/20 text-orange-600 border border-orange-300 rounded-sm w-full px-3 py-2 shadow-md
+                  hover:shadow-none hover:bg-orange-400 hover:text-white transition"
+                  onClick={() => mostrarAlert(index, card.titulo, card.precio)}
+                >
+                  Ver Más
+                </button>
+                <button
+                  className="bg-green-100/20 text-green-600 border border-green-300 rounded-sm w-full px-3 py-2 shadow-md
+                   hover:shadow-none hover:bg-green-400 hover:text-white transition"
+                  onClick={() => {
+                    setProductoSeleccionado(card);
+                    abrirModal();
+                  }}
+                >
+                  Comprar
+                </button>
+              </div>
             </div>
           </div>
-
-          <div className="flex flex-col items-center gap-1 w-full">
-            <button className="bg-orange-100/20 text-orange-600 border border-orange-300 rounded-sm w-full px-3 py-2 shadow-md
-                   hover:shadow-none hover:bg-orange-400 hover:text-white transition">
-              Ver Más
-            </button>
-            <button className="bg-green-100/20 text-green-600 border border-green-300 rounded-sm w-full px-3 py-2 shadow-md
-                   hover:shadow-none hover:bg-green-400 hover:text-white transition">
-              Comprar
-            </button>
-          </div>
-        </div>
+        ))}
       </div>
-    ))}
-  </div>
-</section>
+      {mostrarModal && <Comprar onClose={cerrarModal} data={productoSeleccionado} />}
+    </section>
   );
 }

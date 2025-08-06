@@ -27,7 +27,7 @@ export default function NavMen() {
   }
 
   return (
-    <header className="fixed  w-full lg:w-auto lg:right-[50px] lg:left-[50px] h-[55px] bg-white text-black flex items-center justify-between px-5 border-b border-green-300 z-50">
+    <header className="fixed  w-full lg:w-auto lg:right-[50px] lg:left-[50px] h-[55px] bg-fondoUno text-black flex items-center justify-between px-5 border-b border-green-300 z-50">
 
       {/* Hamburguesa (solo mobile/tablet) */}
       <button
