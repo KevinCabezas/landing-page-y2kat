@@ -1,47 +1,58 @@
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import Comprar from "./Comprar";
+import Detalles from './Detalles';
 
 export default function Productos() {
   const [mostrarModal, setMostrarModal] = useState(false);
+  const [mostrarModalDetalle, setMostrarModalDetalle] = useState(false);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
 
   const abrirModal = () => setMostrarModal(true);
   const cerrarModal = () => setMostrarModal(false);
+  
+  const abrirModalDetalle = () => setMostrarModalDetalle(true);
+  const cerrarModalDetalle = () => setMostrarModalDetalle(false);
 
   const cards = [
     {
       imagen: "/campera.png",
+      detalles: ["/campera.png", "/camisa.png", "/vestido.png", "/jardinero.png"],
       titulo: "Campera",
       precio: "$10.000,00",
       estado: "4.5",
     },
     {
       imagen: "/camisa.png",
+      detalles: ["/campera.png", "/camisa.png", "/vestido.png", "/jardinero.png"],
       titulo: "Camisa",
       precio: "$10.000,00",
       estado: "4.5",
     },
     {
       imagen: "/vestido.png",
+      detalles: ["/campera.png", "/camisa.png", "/vestido.png", "/jardinero.png"],
       titulo: "E-commers-3",
       precio: "$10.000,00",
       estado: "4.5",
     },
     {
       imagen: "/jardinero.png",
+      detalles: ["/campera.png", "/camisa.png", "/vestido.png", "/jardinero.png"],
       titulo: "Jardinero",
       precio: "$16.000,00",
       estado: "5.0",
     },
     {
       imagen: "/campera.png",
+      detalles: ["/campera.png", "/camisa.png", "/vestido.png", "/jardinero.png"],
       titulo: "E-commers-4",
       precio: "$10.000,00",
       estado: "4.5",
     },
     {
       imagen: "/campera.png",
+      detalles: ["/campera.png", "/camisa.png", "/vestido.png", "/jardinero.png"],
       titulo: "E-commers-4",
       precio: "$10.000,00",
       estado: "3.5",
@@ -84,7 +95,10 @@ export default function Productos() {
               <div className="flex flex-col items-center gap-1 w-full">
                 <button className="bg-orange-100/20 text-orange-600 border border-orange-300 rounded-sm w-full px-3 py-2 shadow-md
                   hover:shadow-none hover:bg-orange-400 hover:text-white transition"
-                  onClick={() => mostrarAlert(index, card.titulo, card.precio)}
+                  onClick={() => {
+                    setProductoSeleccionado(card);
+                    abrirModalDetalle();
+                  }}
                 >
                   Ver Más
                 </button>
@@ -104,6 +118,7 @@ export default function Productos() {
         ))}
       </div>
       {mostrarModal && <Comprar onClose={cerrarModal} data={productoSeleccionado} />}
+      {mostrarModalDetalle && <Detalles onClose={cerrarModalDetalle} data={productoSeleccionado} />}
     </section>
   );
 }
