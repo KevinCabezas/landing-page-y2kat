@@ -3,8 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import Incio from '../components/Inicio';
 import Productos from '../components/Productos';
 import Entregas from '../components/Entregas';
-import Pagos from '../components/Pagos';
-import SobreMi from '../components/SobreMi';
 import CardSeccion from '../components/ejemplo';
 import Comprar from '../components/Comprar';
 ---
@@ -18,13 +16,13 @@ import Comprar from '../components/Comprar';
     <Productos client:load />
   </section>
 
-  <section id="entregas">
-    <Entregas></Entregas>
+  <section id="metodos">
+    <Entregas client:load></Entregas>
   </section>
-
+<!-- 
   <section id="pagos">
     <Pagos/>
-  </section>
+  </section> -->
 
   <section id="sobremi">
     <!-- <SobreMi></SobreMi> -->

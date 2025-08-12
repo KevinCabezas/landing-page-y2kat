@@ -5,11 +5,11 @@ export default function NavMen() {
   const [menuAbierto, setMenuAbierto] = useState(false);
 
   const secciones = [
-    { texto: "inicio", icono: "ic:round-home" },
-    { texto: "productos", icono: "mdi:hanger" }, // ícono de ropa en móvil
-    { texto: "entregas", icono: "mdi:truck-delivery" },
-    { texto: "pagos", icono: "mdi:credit-card-outline" },
-    { texto: "sobre mi", icono: "mdi:account-circle-outline" }
+    { texto: "inicio", ruta: "inicio", icono: "ic:round-home" },
+    { texto: "productos", ruta: "productos", icono: "mdi:hanger" }, // ícono de ropa en móvil
+    { texto: "entregas", ruta: "metodos", icono: "mdi:truck-delivery" },
+    { texto: "pagos", ruta: "metodos", icono: "mdi:credit-card-outline" },
+    { texto: "sobre mi", ruta: "sobremi", icono: "mdi:account-circle-outline" }
   ];
 
   const redes = [
@@ -26,6 +26,30 @@ export default function NavMen() {
       .join(" ");
   }
 
+  const enviarWhatsApp = () => {
+    const numero = "5491141460711";
+    const texto = "";
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+    window.open(url, "_blank");
+  };
+
+  const handlerRedes = (id) => {
+    switch (id) {
+      case 0:
+        alert("Instagram");
+        break;
+      case 1:
+        alert("Facebook");
+        break;
+      case 2:
+        enviarWhatsApp();
+        break;
+      default:
+        alert("Gmail");
+        break
+    }
+  }
+  
   return (
     <header className="fixed  w-full lg:w-auto lg:right-[50px] lg:left-[50px] h-[55px] bg-fondoUno text-black flex items-center justify-between px-5 border-b border-green-300 z-50">
 
@@ -47,7 +71,8 @@ export default function NavMen() {
         {secciones.map((secc, i) => (
           <a
             key={i}
-            href={`#${secc.texto.replace(/\s+/g, "")}`}
+            // href={`#${secc.texto.replace(/\s+/g, "")}`}
+            href={`#${secc.ruta}`}
             className="text-base hover:text-orange-400 duration-300"
           >
             {capitalizar(secc.texto)}
@@ -58,11 +83,12 @@ export default function NavMen() {
       {/* Redes sociales en desktop */}
       <div className="hidden lg:flex gap-3 order-3">
         {redes.map((icono, i) => (
-          <Icon
-            key={i}
-            icon={icono.nombre}
-            className={`text-xl duration-300 ${icono.estilo}`}
-          />
+          <button key={i} onClick={() => handlerRedes(i)}>
+            <Icon
+              icon={icono.nombre}
+              className={`text-2xl duration-300 ${icono.estilo}`}
+            />
+          </button>
         ))}
       </div>
 
@@ -92,11 +118,12 @@ export default function NavMen() {
 
             <div className="mt-auto flex gap-4 pt-6 border-t border-gray-200 justify-center">
               {redes.map((icono, i) => (
-                <Icon
-                  key={i}
-                  icon={icono.nombre}
-                  className={`text-2xl duration-300 ${icono.estilo}`}
-                />
+                <button key={i} onClick={() => handlerRedes(i)}>
+                  <Icon
+                    icon={icono.nombre}
+                    className={`text-2xl duration-300 ${icono.estilo}`}
+                  />
+                </button>
               ))}
             </div>
           </div>
